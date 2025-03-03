@@ -1,4 +1,6 @@
-export const navigation = [
+import { NavSection } from '@/types/nav'
+
+export const navigation: NavSection[] = [
   {
     title: 'Introduction',
     items: [
@@ -19,8 +21,18 @@ export const navigation = [
     items: [
       {
         title: 'Blocks',
-        href: '/docs/blocks',
-        description: 'Get block height and information',
+        items: [
+          {
+            title: 'Get Block Height',
+            href: '/docs/blocks',
+            description: 'Get current block height',
+          },
+          {
+            title: 'Get Block Details',
+            href: '/docs/blocks/details',
+            description: 'Get detailed block information by hash',
+          }
+        ]
       },
       {
         title: 'Blockchain',

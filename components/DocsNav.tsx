@@ -3,58 +3,43 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-
-interface NavItem {
-  title: string
-  href: string
-  description?: string
-}
-
-interface NavSection {
-  title: string
-  items?: NavItem[]
-}
-
-const navigation: NavSection[] = [
-  {
-    title: 'Introduction',
-    items: [
-      {
-        title: 'Overview',
-        href: '/docs',
-        description: 'Introduction to DCD Blockchain API',
-      },
-      {
-        title: 'Getting Started',
-        href: '/docs/getting-started',
-        description: 'Learn how to use the API',
-      },
-    ],
-  },
-  {
-    title: 'API Reference',
-    items: [
-      {
-        title: 'Blocks',
-        href: '/docs/blocks',
-        description: 'Get block height and information',
-      },
-      {
-        title: 'Block Details',
-        href: '/docs/blocks/details',
-        description: 'Get detailed block information by hash',
-      },
-      {
-        title: 'Blockchain',
-        href: '/docs/blockchain',
-        description: 'Get blockchain network information',
-      },
-    ],
-  },
-]
+import { navigation } from '@/config/nav'
+import { NavItem } from '@/types/nav'
 
 export function DocsNav() {
   const pathname = usePathname()
+
+  const renderNavItems = (items: NavItem[]) => {
+    return items.map((item) => {
+      if (item.items) {
+        return (
+          <div key={item.title} className="space-y-2">
+            <h5 className="font-medium text-sm px-3">{item.title}</h5>
+            <div className="pl-3 space-y-1">
+              {renderNavItems(item.items)}
+            </div>
+          </div>
+        )
+      }
+
+      return item.href ? (
+        <Link
+          key={item.href}
+          href={item.href}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground",
+            pathname === item.href && "bg-accent"
+          )}>
+          <div className="text-sm font-medium leading-none">{item.title}</div>
+          {item.description && (
+            <p className="line-clamp-2 text-sm text-muted-foreground">
+              {item.description}
+            </p>
+          )}
+        </Link>
+      ) : null
+    })
+  }
 
   return (
     <div className="w-full space-y-6">
@@ -63,22 +48,7 @@ export function DocsNav() {
           <h4 className="font-medium">{section.title}</h4>
           {section.items && (
             <div className="grid gap-2">
-              {section.items.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground",
-                    pathname === item.href && "bg-accent"
-                  )}>
-                  <div className="text-sm font-medium leading-none">{item.title}</div>
-                  {item.description && (
-                    <p className="line-clamp-2 text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                  )}
-                </Link>
-              ))}
+              {renderNavItems(section.items)}
             </div>
           )}
         </div>

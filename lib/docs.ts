@@ -1,15 +1,41 @@
 import { NavItem, NavSection } from '@/types/nav'
 
-export function getPagerForPath(navigation: NavSection[], currentPath: string): { prev?: NavItem; next?: NavItem } {
-  // Flatten all items into a single array
-  const allItems = navigation.flatMap(section => section.items || [])
+export function getPagerForPath(navigation: NavSection[], currentPath: string): { 
+  prev?: Pick<Required<NavItem>, 'href' | 'title'>,
+  next?: Pick<Required<NavItem>, 'href' | 'title'> 
+} {
+  // Create flattened array of all navigable items
+  const flattenedItems: NavItem[] = []
   
+  navigation.forEach(section => {
+    section.items?.forEach(item => {
+      if (item.items) {
+        // Add nested items
+        item.items.forEach(subItem => {
+          if (subItem.href) {
+            flattenedItems.push(subItem)
+          }
+        })
+      } else if (item.href) {
+        // Add top-level items
+        flattenedItems.push(item)
+      }
+    })
+  })
+
   // Find current item index
-  const currentIndex = allItems.findIndex(item => item.href === currentPath)
+  const currentIndex = flattenedItems.findIndex(item => item.href === currentPath)
   
   // Get prev and next items
-  const prev = currentIndex > 0 ? allItems[currentIndex - 1] : undefined
-  const next = currentIndex < allItems.length - 1 ? allItems[currentIndex + 1] : undefined
+  const prev = currentIndex > 0 ? {
+    href: flattenedItems[currentIndex - 1].href!,
+    title: flattenedItems[currentIndex - 1].title
+  } : undefined
+
+  const next = currentIndex < flattenedItems.length - 1 ? {
+    href: flattenedItems[currentIndex + 1].href!,
+    title: flattenedItems[currentIndex + 1].title
+  } : undefined
   
   return { prev, next }
 }
