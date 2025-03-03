@@ -4,32 +4,51 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import { usePathname } from 'next/navigation'
 import CodeBlock from '@/components/CodeBlock'
 import { config } from '@/config'
 import { DocsPager } from '@/components/DocsPager'
-import { navigation } from '@/config/nav'
+import { usePathname } from 'next/navigation'
+import { navigation } from '@/config/nav' // Move navigation to separate file
 import { getPagerForPath } from '@/lib/docs'
 
-export default function BlocksApiPage() {
+export default function BlockchainInfoPage() {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<string | null>(null)
   const pathname = usePathname()
   const { prev, next } = getPagerForPath(navigation, pathname)
 
-  const curlRequest = `curl ${config.web.apiUrl}/api/blocks`
-  const fetchRequest = `fetch("${config.web.apiUrl}/api/blocks")
+  const curlRequest = `curl ${config.web.apiUrl}/api/blockchain`
+  const fetchRequest = `fetch("${config.web.apiUrl}/api/blockchain")
   .then(response => response.json())
   .then(data => console.log(data));`
   
   const exampleResponse = `{
-  "height": 123456
+  "chain": "main",
+  "blocks": 670,
+  "headers": 670,
+  "bestblockhash": "0000000000001313b5777d16adb816ec585be99d684b739dad83897aa37920e1",
+  "difficulty": 708602.2267808428,
+  "mediantime": 1740987633,
+  "verificationprogress": 1,
+  "initialblockdownload": false,
+  "chainwork": "000000000000000000000000000000000000000000000000118717a51504218b",
+  "size_on_disk": 756916,
+  "pruned": false,
+  "softforks": {
+    "bip34": {
+      "type": "buried",
+      "active": true,
+      "height": 1
+    }
+    // ... other softforks
+  },
+  "warnings": ""
 }`
 
   const handleTestApi = async () => {
     setLoading(true)
     try {
-      const response = await fetch(`${config.web.apiUrl}/api/blocks`)
+      const response = await fetch(`${config.web.apiUrl}/api/blockchain`)
       const data = await response.json()
       setResult(JSON.stringify(data, null, 2))
     } catch {
@@ -42,18 +61,17 @@ export default function BlocksApiPage() {
   return (
     <div className="container mx-auto py-10">
       <div className="max-w-4xl">
-        <h1 className="text-3xl font-bold mb-4">Blocks API</h1>
+        <h1 className="text-3xl font-bold mb-4">Blockchain Info</h1>
         <p className="text-gray-600 mb-8">
-          Endpoints for retrieving block information from the {config.blockchain.name} blockchain
+          Get detailed information about the blockchain state and network
         </p>
 
         <div className="space-y-8">
-          {/* API Reference Card */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Get Block Height</CardTitle>
+              <CardTitle className="text-lg">Get Blockchain Info</CardTitle>
               <CardDescription>
-                Retrieve the current block height from the blockchain
+                Retrieve current blockchain information including network state and active softforks
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -61,7 +79,7 @@ export default function BlocksApiPage() {
                 <div>
                   <h3 className="font-medium mb-2">Endpoint</h3>
                   <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono">
-                    GET /api/blocks
+                    GET /api/blockchain
                   </code>
                 </div>
 
@@ -89,7 +107,6 @@ export default function BlocksApiPage() {
             </CardContent>
           </Card>
 
-          {/* Try It Card */}
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Try It Out</CardTitle>
@@ -117,7 +134,7 @@ export default function BlocksApiPage() {
           </Card>
         </div>
 
-        <DocsPager
+        <DocsPager 
           prev={prev}
           next={next}
         />

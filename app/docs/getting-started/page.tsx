@@ -1,8 +1,16 @@
+"use client"
+
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { config } from '@/config'
 import { DocsPager } from '@/components/DocsPager'
+import { usePathname } from 'next/navigation'
+import { navigation } from '@/config/nav'
+import { getPagerForPath } from '@/lib/docs'
 
 export default function GettingStartedPage() {
+  const pathname = usePathname()
+  const { prev, next } = getPagerForPath(navigation, pathname)
+
   return (
     <div className="container mx-auto py-10">
       <div className="max-w-4xl">
@@ -71,14 +79,8 @@ export default function GettingStartedPage() {
         </div>
 
         <DocsPager
-          prev={{
-            href: "/docs",
-            title: "Introduction"
-          }}
-          next={{
-            href: "/docs/blocks",
-            title: "Blocks API"
-          }}
+          prev={prev}
+          next={next}
         />
       </div>
     </div>

@@ -39,6 +39,11 @@ const navigation: NavSection[] = [
         href: '/docs/blocks',
         description: 'Get block height and information',
       },
+      {
+        title: 'Blockchain',
+        href: '/docs/blockchain',
+        description: 'Get blockchain network information',
+      },
     ],
   },
 ]
@@ -60,8 +65,7 @@ export function DocsNav() {
                   className={cn(
                     "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground",
                     pathname === item.href && "bg-accent"
-                  )}
-                >
+                  )}>
                   <div className="text-sm font-medium leading-none">{item.title}</div>
                   {item.description && (
                     <p className="line-clamp-2 text-sm text-muted-foreground">
