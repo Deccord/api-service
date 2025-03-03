@@ -73,6 +73,16 @@ export const navigation: NavSection[] = [
             description: 'Get detailed information about a transaction'
           }
         ]
+      },
+      {
+        title: 'Address',
+        items: [
+          {
+            title: 'Get Address Balance',
+            href: '/docs/address',
+            description: 'Get balance information for an address'
+          }
+        ]
       }
     ],
   }
