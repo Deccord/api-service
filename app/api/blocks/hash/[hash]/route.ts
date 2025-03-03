@@ -7,16 +7,13 @@ export async function GET(
   request: Request,
   { params }: { params: { hash: string } }
 ) {
-  // Await the entire params object
   const resolvedParams = await params
-  const hash = resolvedParams.hash
   
   try {
-    const block = await blockdetails.getBlock(hash)
+    const block = await blockdetails.getBlock(resolvedParams.hash)
     return NextResponse.json(block)
   } catch (error) {
     console.error('Block details fetch error:', error)
-    
     return NextResponse.json(
       { 
         error: 'Failed to fetch block details',

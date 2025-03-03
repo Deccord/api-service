@@ -1,15 +1,10 @@
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { NavItem } from '@/types/nav'
 
 interface DocsPagerProps {
-  prev?: {
-    href: string
-    title: string
-  }
-  next?: {
-    href: string
-    title: string
-  }
+  prev?: Pick<Required<NavItem>, 'href' | 'title'>
+  next?: Pick<Required<NavItem>, 'href' | 'title'>
 }
 
 export function DocsPager({ prev, next }: DocsPagerProps) {
