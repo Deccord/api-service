@@ -1,0 +1,195 @@
+
+17:16:50
+== Addressindex ==
+getaddressbalance ( ["address",...] )
+getaddressdeltas ( ["address",...] )
+getaddressmempool ( ["address",...] )
+getaddresstxids ( ["address",...] )
+getaddressutxos ( ["address",...] )
+
+== Blockchain ==
+getbestblockhash
+getbestchainlock
+getblock "blockhash" ( verbosity )
+getblockchaininfo
+getblockcount
+getblockfilter "blockhash" ( "filtertype" )
+getblockhash height
+getblockhashes high low
+getblockheader "blockhash" ( verbose )
+getblockheaders "hash" ( count verbose )
+getblockstats hash_or_height ( stats )
+getchaintips ( count branchlen )
+getchaintxstats ( nblocks "blockhash" )
+getdifficulty
+getmempoolancestors "txid" ( verbose )
+getmempooldescendants "txid" ( verbose )
+getmempoolentry "txid"
+getmempoolinfo
+getmerkleblocks "filter" "hash" ( count )
+getrawmempool ( verbose )
+getspecialtxes "blockhash" ( type count skip verbosity )
+getspentinfo ( {"txid":"hex","index":n} )
+gettxout "txid" n ( include_mempool )
+gettxoutproof ["txid",...] ( "blockhash" )
+gettxoutsetinfo ( "hash_type" hash_or_height use_index )
+preciousblock "blockhash"
+pruneblockchain height
+savemempool
+scantxoutset "action" ( [scanobjects,...] )
+verifychain ( checklevel nblocks )
+verifytxoutproof "proof"
+
+== Control ==
+debug "category"
+getmemoryinfo ( "mode" )
+getrpcinfo
+help ( "command" "subcommand" )
+logging ( ["include_category",...] ["exclude_category",...] )
+stop
+uptime
+
+== Deccord ==
+coinjoin "command"
+getcoinjoininfo
+getgovernanceinfo
+getpoolinfo
+getsuperblockbudget index
+gobject
+masternode "command"
+mnsync "mode"
+spork "command"
+sporkupdate "name" value
+voteraw "mn-collateral-tx-hash" mn-collateral-tx-index "governance-hash" "vote-signal" "vote-outcome" time "vote-sig"
+
+== Evo ==
+bls "command"
+protx "command"
+quorum "command"
+verifychainlock "blockHash" "signature" ( blockHeight )
+verifyislock "id" "txid" "signature" ( maxHeight )
+
+== Generating ==
+generateblock "address/descriptor" ["rawtx/txid",...]
+generatetoaddress nblocks "address" ( maxtries )
+generatetodescriptor num_blocks "descriptor" ( maxtries )
+
+== Mining ==
+getblocktemplate ( "template_request" )
+getmininginfo
+getnetworkhashps ( nblocks height )
+prioritisetransaction "txid" fee_delta
+submitblock "hexdata" ( "dummy" )
+submitheader "hexdata"
+
+== Network ==
+addnode "node" "command"
+clearbanned
+cleardiscouraged
+disconnectnode ( "address" nodeid )
+getaddednodeinfo ( "node" )
+getconnectioncount
+getnettotals
+getnetworkinfo
+getnodeaddresses ( count )
+getpeerinfo
+listbanned
+ping
+setban "subnet" "command" ( bantime absolute )
+setnetworkactive state
+
+== Rawtransactions ==
+analyzepsbt "psbt"
+combinepsbt ["psbt",...]
+combinerawtransaction ["hexstring",...]
+converttopsbt "hexstring" ( permitsigdata )
+createpsbt [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount},{"data":"hex"},...] ( locktime )
+createrawtransaction [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount},{"data":"hex"},...] ( locktime )
+decodepsbt "psbt"
+decoderawtransaction "hexstring"
+decodescript "hexstring"
+finalizepsbt "psbt" ( extract )
+fundrawtransaction "hexstring" ( options )
+getrawtransaction "txid" ( verbose "blockhash" )
+gettxchainlocks ["txid",...]
+joinpsbts ["psbt",...]
+sendrawtransaction "hexstring" ( maxfeerate instantsend bypasslimits )
+signrawtransactionwithkey "hexstring" ["privatekey",...] ( [{"txid":"hex","vout":n,"scriptPubKey":"hex","redeemScript":"hex","amount":amount},...] "sighashtype" )
+testmempoolaccept ["rawtx",...] ( maxfeerate )
+utxoupdatepsbt "psbt" ( ["",{"desc":"str","range":n or [n,n]},...] )
+
+== Util ==
+createmultisig nrequired ["key",...]
+deriveaddresses "descriptor" ( range )
+estimatesmartfee conf_target ( "estimate_mode" )
+getdescriptorinfo "descriptor"
+getindexinfo ( "index_name" )
+signmessagewithprivkey "privkey" "message"
+validateaddress "address"
+verifymessage "address" "signature" "message"
+
+== Wallet ==
+abandontransaction "txid"
+abortrescan
+addmultisigaddress nrequired ["key",...] ( "label" )
+backupwallet "destination"
+createwallet "wallet_name" ( disable_private_keys blank "passphrase" avoid_reuse load_on_startup )
+dumphdinfo
+dumpprivkey "address"
+dumpwallet "filename"
+encryptwallet "passphrase"
+getaddressesbylabel "label"
+getaddressinfo "address"
+getbalance ( "dummy" minconf addlocked include_watchonly avoid_reuse )
+getbalances
+getnewaddress ( "label" )
+getrawchangeaddress
+getreceivedbyaddress "address" ( minconf addlocked )
+getreceivedbylabel "label" ( minconf addlocked )
+gettransaction "txid" ( include_watchonly verbose )
+getunconfirmedbalance
+getwalletinfo
+importaddress "address" ( "label" rescan p2sh )
+importelectrumwallet "filename" ( index )
+importmulti "requests" ( "options" )
+importprivkey "privkey" ( "label" rescan )
+importprunedfunds "rawtransaction" "txoutproof"
+importpubkey "pubkey" ( "label" rescan )
+importwallet "filename"
+keypoolrefill ( newsize )
+listaddressbalances ( minamount )
+listaddressgroupings
+listlabels ( "purpose" )
+listlockunspent
+listreceivedbyaddress ( minconf addlocked include_empty include_watchonly "address_filter" )
+listreceivedbylabel ( minconf addlocked include_empty include_watchonly )
+listsinceblock ( "blockhash" target_confirmations include_watchonly include_removed )
+listtransactions ( "label" count skip include_watchonly )
+listunspent ( minconf maxconf ["address",...] include_unsafe query_options )
+listwalletdir
+listwallets
+loadwallet "filename" ( load_on_startup )
+lockunspent unlock ( [{"txid":"hex","vout":n},...] )
+removeprunedfunds "txid"
+rescanblockchain ( start_height stop_height )
+sendmany "" {"address":amount} ( minconf addlocked "comment" ["address",...] use_is use_cj conf_target "estimate_mode" )
+sendtoaddress "address" amount ( "comment" "comment_to" subtractfeefromamount use_is use_cj conf_target "estimate_mode" avoid_reuse )
+setcoinjoinamount amount
+setcoinjoinrounds rounds
+setlabel "address" "label"
+settxfee amount
+setwalletflag "flag" ( value )
+signmessage "address" "message"
+signrawtransactionwithwallet "hexstring" ( [{"txid":"hex","vout":n,"scriptPubKey":"hex","redeemScript":"hex","amount":amount},...] "sighashtype" )
+unloadwallet ( "wallet_name" load_on_startup )
+upgradetohd ( "mnemonic" "mnemonicpassphrase" "walletpassphrase" rescan )
+upgradewallet ( version )
+walletcreatefundedpsbt [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount},{"data":"hex"},...] ( locktime options bip32derivs )
+walletlock
+walletpassphrase "passphrase" timeout ( mixingonly )
+walletpassphrasechange "oldpassphrase" "newpassphrase"
+walletprocesspsbt "psbt" ( sign "sighashtype" bip32derivs )
+wipewallettxes ( keep_confirmed )
+
+== Zmq ==
+getzmqnotifications
