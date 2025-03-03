@@ -56,6 +56,11 @@ export const navigation: NavSection[] = [
             title: 'Get Network Hashrate',
             href: '/docs/network/hashrate',
             description: 'Get current network hashrate'
+          },
+          {
+            title: 'Get Network Supply',
+            href: '/docs/network/supply',
+            description: 'Get total coin supply in circulation'
           }
         ]
       }
