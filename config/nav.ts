@@ -63,6 +63,16 @@ export const navigation: NavSection[] = [
             description: 'Get total coin supply in circulation'
           }
         ]
+      },
+      {
+        title: 'Transactions',
+        items: [
+          {
+            title: 'Get Transaction Details',
+            href: '/docs/tx',
+            description: 'Get detailed information about a transaction'
+          }
+        ]
       }
     ],
   }
