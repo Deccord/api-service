@@ -28,6 +28,11 @@ export const navigation: NavSection[] = [
             description: 'Get current block height',
           },
           {
+            title: 'Get Block Hash',
+            href: '/docs/blocks/hash',
+            description: 'Get block hash by height',
+          },
+          {
             title: 'Get Block Details',
             href: '/docs/blocks/details',
             description: 'Get detailed block information by hash',

@@ -1,15 +1,14 @@
 import { NextResponse } from 'next/server'
 import { block } from '@/services/block'
 
-export const dynamic = 'force-dynamic' // Important for Next.js 15 route handlers
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
   try {
-    const blockHeight = await block.getBlockHeight()
-    return NextResponse.json(blockHeight)
+    const height = await block.getHeight()
+    return NextResponse.json({ height })
   } catch (error) {
     console.error('Block height fetch error:', error)
-    
     return NextResponse.json(
       { 
         error: 'Failed to fetch block height',
