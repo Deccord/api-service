@@ -40,6 +40,11 @@ const navigation: NavSection[] = [
         description: 'Get block height and information',
       },
       {
+        title: 'Block Details',
+        href: '/docs/blocks/details',
+        description: 'Get detailed block information by hash',
+      },
+      {
         title: 'Blockchain',
         href: '/docs/blockchain',
         description: 'Get blockchain network information',
