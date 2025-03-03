@@ -41,9 +41,24 @@ export const navigation: NavSection[] = [
       },
       {
         title: 'Blockchain',
-        href: '/docs/blockchain',
-        description: 'Get blockchain network information',
+        items: [
+          {
+            title: 'Get Blockchain Info',
+            href: '/docs/blockchain',
+            description: 'Get blockchain network information'
+          }
+        ]
       },
+      {
+        title: 'Network',
+        items: [
+          {
+            title: 'Get Network Hashrate',
+            href: '/docs/network/hashrate',
+            description: 'Get current network hashrate'
+          }
+        ]
+      }
     ],
-  },
+  }
 ]
