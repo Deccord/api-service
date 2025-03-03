@@ -81,6 +81,11 @@ export const navigation: NavSection[] = [
             title: 'Get Address Balance',
             href: '/docs/address',
             description: 'Get balance information for an address'
+          },
+          {
+            title: 'Get Address Transactions',
+            href: '/docs/address/transactions',
+            description: 'Get transaction history for an address'
           }
         ]
       }
