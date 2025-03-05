@@ -5,10 +5,10 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: Request,
-  { params }: { params: { height: string } }
+  context: { params: Promise<{ height: string }> }
 ) {
-  const resolvedParams = await params
-  const height = parseInt(resolvedParams.height, 10)
+  const { height: heightParam } = await context.params
+  const height = parseInt(heightParam, 10)
   
   if (isNaN(height)) {
     return NextResponse.json(
