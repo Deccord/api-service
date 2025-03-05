@@ -5,12 +5,11 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: Request,
-  { params }: { params: { address: string } }
+  context: { params: Promise<{ address: string }> }
 ) {
-  const resolvedParams = await params
-  
   try {
-    const info = await address.getAddressInfo(resolvedParams.address)
+    const { address: addressParam } = await context.params
+    const info = await address.getAddressInfo(addressParam)
     return NextResponse.json(info)
   } catch (error) {
     console.error('Address info fetch error:', error)

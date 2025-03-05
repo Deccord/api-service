@@ -5,12 +5,11 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: Request,
-  { params }: { params: { hash: string } }
+  context: { params: Promise<{ hash: string }> }
 ) {
-  const resolvedParams = await params
-  
   try {
-    const block = await blockdetails.getBlock(resolvedParams.hash)
+    const { hash } = await context.params
+    const block = await blockdetails.getBlock(hash)
     return NextResponse.json(block)
   } catch (error) {
     console.error('Block details fetch error:', error)

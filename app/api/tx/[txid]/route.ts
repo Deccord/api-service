@@ -5,12 +5,11 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: Request,
-  { params }: { params: { txid: string } }
+  context: { params: Promise<{ txid: string }> }
 ) {
-  const resolvedParams = await params
-  
   try {
-    const tx = await transaction.getTransaction(resolvedParams.txid)
+    const { txid } = await context.params
+    const tx = await transaction.getTransaction(txid)
     return NextResponse.json(tx)
   } catch (error) {
     console.error('Transaction fetch error:', error)

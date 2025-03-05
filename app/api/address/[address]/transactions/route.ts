@@ -5,13 +5,14 @@ export const dynamic = 'force-dynamic'
 
 export async function GET(
   request: Request,
-  { params }: { params: { address: string } }
+  context: { params: Promise<{ address: string }> }
 ) {
   const { searchParams } = new URL(request.url)
   const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined
   
   try {
-    const transactions = await address.getTransactions(params.address, { limit })
+    const { address: addressParam } = await context.params
+    const transactions = await address.getTransactions(addressParam, { limit })
     return NextResponse.json({ transactions })
   } catch (error) {
     console.error('Address transactions fetch error:', error)
