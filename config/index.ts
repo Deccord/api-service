@@ -1,10 +1,10 @@
 export const config = {
   web: {
-    name: process.env.APP_NAME || 'DCD API',
-    title: process.env.APP_TITLE || 'DCD Blockchain API Documentation',
-    description: process.env.APP_DESCRIPTION || 'Public REST API for accessing DCD blockchain data',
-    url: process.env.APP_URL || 'http://localhost:3000',
-    apiUrl: process.env.API_URL || 'http://localhost:3001'
+    name: process.env.NEXT_PUBLIC_APP_NAME!,
+    title: process.env.NEXT_PUBLIC_APP_TITLE!,
+    description: process.env.NEXT_PUBLIC_APP_DESCRIPTION!,
+    url: process.env.NEXT_PUBLIC_APP_URL!,
+    apiUrl: process.env.NEXT_PUBLIC_API_URL!
   },
   blockchain: {
     name: process.env.CHAIN_NAME || 'Deccord',
